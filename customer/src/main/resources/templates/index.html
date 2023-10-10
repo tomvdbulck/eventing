@@ -16,6 +16,7 @@
                 <td th:text="${customer.id}"></td>
                 <td th:text="${customer.name}"></td>
                 <td><a th:href="@{/new_order/{id}(id=${customer.id})}">New Order</a></td>
+                <td><a th:href="@{/list_order/{id}(id=${customer.id})}">List Orders</a></td>
             </tr>
             </tbody>
         </table>

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table
-public class Order extends AbstractAggregateRoot<Order> {
+public class CustomerOrder extends AbstractAggregateRoot<CustomerOrder> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,6 @@ public class Order extends AbstractAggregateRoot<Order> {
 
     @NotNull(message = "It can never be free")
     private BigDecimal amount;
-    
 
     private boolean paid;
 
