@@ -12,6 +12,8 @@ public class Customer extends AbstractAggregateRoot<Customer> {
     private Long id;
     private String name;
 
+    private int amountOfOrders;
+
     public Customer(final String name) {
         this.name = name;
     }
@@ -26,5 +28,13 @@ public class Customer extends AbstractAggregateRoot<Customer> {
 
     public String getName() {
         return this.name;
+    }
+
+    public void addOrder() {
+        this.amountOfOrders = amountOfOrders +1;
+    }
+
+    public int getAmountOfOrders() {
+        return this.amountOfOrders;
     }
 }

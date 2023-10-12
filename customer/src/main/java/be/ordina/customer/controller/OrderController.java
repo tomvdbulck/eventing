@@ -46,6 +46,8 @@ public class OrderController {
             return "new-order";
         }
 
+        order.complete();
+
         orderRepository.save(order);
         return "redirect:/list_order/"+order.getCustomerId();
     }

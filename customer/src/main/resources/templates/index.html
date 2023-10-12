@@ -7,6 +7,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th># of Orders</th>
                 <th>Orders</th>
                 <th>Delete</th>
             </tr>
@@ -15,6 +16,7 @@
             <tr th:each="customer : ${customers}">
                 <td th:text="${customer.id}"></td>
                 <td th:text="${customer.name}"></td>
+                <td th:text="${customer.amountOfOrders}"></td>
                 <td><a th:href="@{/new_order/{id}(id=${customer.id})}">New Order</a></td>
                 <td><a th:href="@{/list_order/{id}(id=${customer.id})}">List Orders</a></td>
             </tr>

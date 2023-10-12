@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -59,5 +60,43 @@ public class CustomerOrder extends AbstractAggregateRoot<CustomerOrder> {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public void complete(){
+        //We do some random shizzle to complete the order.
+
+        registerEvent(new OrderCompletedEvent(this));
+    }
+
+    public class OrderCompletedEvent {
+
+        private LocalDateTime eventTime;
+
+        private Long orderNumber;
+        private BigDecimal amount;
+        private Long customerId;
+
+        public OrderCompletedEvent(CustomerOrder order) {
+            this.eventTime = LocalDateTime.now();
+            this.orderNumber = order.getOrderNumber();
+            this.amount = order.getAmount();
+            this.customerId = order.getCustomerId();
+        }
+
+        public LocalDateTime getEventTime() {
+            return eventTime;
+        }
+
+        public Long getOrderNumber() {
+            return orderNumber;
+        }
+
+        public BigDecimal getAmount() {
+            return amount;
+        }
+
+        public Long getCustomerId() {
+            return customerId;
+        }
     }
 }
