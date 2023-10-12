@@ -46,9 +46,12 @@ public class OrderController {
             return "new-order";
         }
 
-        order.complete();
+        //make sure we get an order number
+        CustomerOrder draftOrder = orderRepository.save(order);
 
-        orderRepository.save(order);
+
+        draftOrder.complete();
+        orderRepository.save(draftOrder);
         return "redirect:/list_order/"+order.getCustomerId();
     }
 }

@@ -32,8 +32,6 @@ public class CustomerService {
         Customer customer = customerRepository.findById(event.getCustomerId()).get();
 
         customer.setAmountOfOrders(customer.getAmountOfOrders() +1);
-        Customer updatedCustomer = customerRepository.save(customer);
-
-        updatedCustomer.getAmountOfOrders();
+        customerRepository.save(customer);
     }
 }
