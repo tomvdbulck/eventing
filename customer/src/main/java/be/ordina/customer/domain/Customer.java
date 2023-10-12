@@ -16,6 +16,7 @@ public class Customer extends AbstractAggregateRoot<Customer> {
 
     public Customer(final String name) {
         this.name = name;
+        this.amountOfOrders = 0;
     }
 
     public Customer() {
@@ -30,8 +31,8 @@ public class Customer extends AbstractAggregateRoot<Customer> {
         return this.name;
     }
 
-    public void addOrder() {
-        this.amountOfOrders = amountOfOrders +1;
+    public void setAmountOfOrders(int amountOfOrders) {
+        this.amountOfOrders = amountOfOrders;
     }
 
     public int getAmountOfOrders() {

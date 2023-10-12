@@ -8,6 +8,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service
@@ -25,16 +26,14 @@ public class CustomerService {
         customerRepository.save(new Customer("Jos"));
     }
 
-    @TransactionalEventListener
-    @Transactional
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT) //IMPORTANT
     void onCompletedOrder(CustomerOrder.OrderCompletedEvent event) {
 
-        Customer customer = customerRepository.findById(event.getCustomerId())
-                .orElseThrow(() -> new RuntimeException(" customer not found " + event.getCustomerId()));
+        Customer customer = customerRepository.findById(event.getCustomerId()).get();
 
-        customer.addOrder();
-        customer = customerRepository.save(customer);
+        customer.setAmountOfOrders(customer.getAmountOfOrders() +1);
+        Customer updatedCustomer = customerRepository.save(customer);
 
-        customer.getAmountOfOrders();
+        updatedCustomer.getAmountOfOrders();
     }
 }
