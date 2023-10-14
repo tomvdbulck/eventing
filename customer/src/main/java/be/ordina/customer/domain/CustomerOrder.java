@@ -65,6 +65,7 @@ public class CustomerOrder extends AbstractAggregateRoot<CustomerOrder> {
     public void complete(){
         //We do some random shizzle to complete the order.
 
+        //#lab1
         registerEvent(new OrderCompletedEvent(this));
     }
 

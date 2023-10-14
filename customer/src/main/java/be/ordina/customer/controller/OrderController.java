@@ -49,7 +49,7 @@ public class OrderController {
         //make sure we get an order number
         CustomerOrder draftOrder = orderRepository.save(order);
 
-
+        //#lab1
         draftOrder.complete();
         orderRepository.save(draftOrder);
         return "redirect:/list_order/"+order.getCustomerId();

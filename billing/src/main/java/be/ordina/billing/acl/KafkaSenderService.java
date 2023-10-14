@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service
+//#lab5
 public class KafkaSenderService {
 
     private final KafkaTemplate<String, Bill.BillPaidEvent> kafkaTemplate;

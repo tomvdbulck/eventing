@@ -12,6 +12,7 @@ public class RandomService {
 
     private Logger logger = LogManager.getLogger(RandomService.class);
 
+    //#lab1 implement this method
     @Async
     @TransactionalEventListener
     void onCompletedOrder(CustomerOrder.OrderCompletedEvent event) {

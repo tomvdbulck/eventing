@@ -28,7 +28,7 @@ That will get your kafka running on the default port: localhost:9092 and zookeep
 These are also the ports used by default by Spring Cloud Stream
 
 
-## Getting Started
+### Getting Started with Kafka
 
 1. Connect to your kafka container
 ```
@@ -43,7 +43,7 @@ These are also the ports used by default by Spring Cloud Stream
   > ls
 ```
 
-## Create a topic
+### Create a topic
 
 Create a simple topic:
 ```
@@ -65,7 +65,7 @@ You can also retrieve a list from kafka-topics from zookeeper:
 ```
 
 
-## Produce messages to Kafka
+### Produce messages to Kafka
 ```
   > ./kafka-console-producer --broker-list localhost:9092 --topic test-topic
 This is a message
@@ -73,7 +73,7 @@ This is another message
 ```
 
 
-## Consume messages
+### Consume messages
 Open a new shell to start the consumer :
 ```
   > docker ps
@@ -111,7 +111,7 @@ This will consume all messages, except the first one as we start from the offset
 
 Keep this consumer open and produce some extra messages and see the effect, your consumer should show you that result.
 
-## Create a topic with multiple partions / replicas
+### Create a topic with multiple partions / replicas
 Lets create a new topic with multiple partitions and replicas.
 
 ```
@@ -140,7 +140,7 @@ You can also see that we have much more partitions each with their own offset:
 
 If you now start to produce messages to that topic you will see that these will be divided over multiple partitions.
 
-## See the status of the various consumer-groups using your kafka.
+### See the status of the various consumer-groups using your kafka.
 
 Lets create a consumer with a group id.
 

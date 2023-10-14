@@ -23,6 +23,7 @@ public class OrderConsumer {
     }
 
 
+    //#lab4
     @KafkaListener(topics = "order-topic")
     @Transactional
     public void consume(OrderCompletedEvent event) {
