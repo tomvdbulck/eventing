@@ -29,3 +29,8 @@ In the `RandomService` log the event.
 
 You can process this asynchronous, with a `TransactionalEventListener`
 
+### And process the event in the CustomerService
+
+Process the event in the customerService so we can increase the customer his order count.
+
+Very similar ... but you need to think about transactions and what would be the default of the `TransactionalEventListener`
