@@ -26,7 +26,7 @@ public class OrderConsumer {
     @KafkaListener(topics = "order-topic")
     @Transactional
     public void consume(OrderCompletedEvent event) {
-        logger.info(String.format("Order is : " + event));
+        logger.info("Order is: {}", event);
 
         Bill bill = new Bill(event.getAmount(), event.getOrderNumber(), event.getCustomerId());
 

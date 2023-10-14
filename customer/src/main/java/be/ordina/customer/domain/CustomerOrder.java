@@ -68,6 +68,11 @@ public class CustomerOrder extends AbstractAggregateRoot<CustomerOrder> {
         registerEvent(new OrderCompletedEvent(this));
     }
 
+    public void pay(){
+        this.paid = true;
+        registerEvent(new OrderPaid(this));
+    }
+
     public class OrderCompletedEvent {
 
         private LocalDateTime eventTime;
@@ -97,6 +102,45 @@ public class CustomerOrder extends AbstractAggregateRoot<CustomerOrder> {
 
         public Long getCustomerId() {
             return customerId;
+        }
+    }
+
+    public class OrderPaid {
+
+        private LocalDateTime eventTime;
+
+        private Long orderNumber;
+        private BigDecimal amount;
+        private Long customerId;
+
+        private boolean paid;
+
+        public OrderPaid(CustomerOrder order) {
+            this.eventTime = LocalDateTime.now();
+            this.orderNumber = order.getOrderNumber();
+            this.amount = order.getAmount();
+            this.customerId = order.getCustomerId();
+            this.paid = true;
+        }
+
+        public LocalDateTime getEventTime() {
+            return eventTime;
+        }
+
+        public Long getOrderNumber() {
+            return orderNumber;
+        }
+
+        public BigDecimal getAmount() {
+            return amount;
+        }
+
+        public Long getCustomerId() {
+            return customerId;
+        }
+
+        public boolean getPaid() {
+            return paid;
         }
     }
 }
