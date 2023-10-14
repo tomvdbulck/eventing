@@ -14,7 +14,6 @@ public class KafkaSenderService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-
     @TransactionalEventListener
     void onCompletedOrder(Bill.BillPaidEvent event) {
         kafkaTemplate.send("billing-topic", event);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -18,6 +19,7 @@ public class Bill extends AbstractAggregateRoot<Bill> {
     private Long customerId;
 
     private boolean paid;
+    private LocalDateTime paymentDate;
 
     public Bill(final BigDecimal amount, final Long orderId, final Long customerId) {
         this.amount = amount;
@@ -32,6 +34,9 @@ public class Bill extends AbstractAggregateRoot<Bill> {
 
     public void pay() {
         this.paid = true;
+        this.paymentDate = LocalDateTime.now();
+
+        registerEvent(new BillPaidEvent(this));
     }
 
     public Long getId() {
@@ -54,17 +59,25 @@ public class Bill extends AbstractAggregateRoot<Bill> {
         return paid;
     }
 
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
     public class BillPaidEvent {
+        private LocalDateTime eventTime;
         private Long billId;
         private Long customerId;
         private Long orderId;
         private BigDecimal amountPaid;
 
-        public BillPaidEvent(Long billId, Long customerId, Long orderId, BigDecimal amountPaid) {
-            this.billId = billId;
-            this.customerId = customerId;
-            this.orderId = orderId;
-            this.amountPaid = amountPaid;
+        private LocalDateTime paymentDate;
+
+        public BillPaidEvent(Bill bill) {
+            this.billId = bill.getId();
+            this.customerId = bill.getCustomerId();
+            this.orderId = bill.getOrderId();
+            this.amountPaid = bill.getAmount();
+            this.paymentDate = bill.getPaymentDate();
         }
 
         public Long getBillId() {
